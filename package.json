@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "node index.js",
+    "build:styles": "node index.js styles",
+    "build:scripts": "node index.js scripts"
+  },
+  "dependencies": {
+    "@newlogic-digital/ui": "^3.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "clean-css": "^5.1.2",
+    "esbuild": "^0.11.16",
+    "esbuild-plugin-postcss2": "^0.0.9",
+    "fs-extra": "^9.1.0",
+    "postcss-custom-media": "^8.0.0",
+    "postcss-custom-selectors": "^6.0.0",
+    "postcss-import": "^14.0.1",
+    "postcss-mixins": "^7.0.3",
+    "postcss-nesting": "^8.0.0",
+    "tiny-glob": "^0.2.8"
+  }
+}
