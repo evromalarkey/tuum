@@ -10,7 +10,7 @@ import CleanCSS from "clean-css";
 import glob from "tiny-glob";
 import fs from "fs";
 import fse from "fs-extra";
-import config from "./config.js";
+import config from "./tuum.config.js";
 
 
 const inputStyles = config.styles.input;
