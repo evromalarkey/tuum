@@ -10,11 +10,12 @@ import CleanCSS from "clean-css";
 import glob from "tiny-glob";
 import fs from "fs";
 import fse from "fs-extra";
+import config from "./config.js";
 
 
-const inputStyles = "./node_modules/@newlogic-digital/ui/src/styles/!(tailwind).css";
-const inputScripts = "./node_modules/@newlogic-digital/ui/src/scripts/*.js";
-const outputDir = "./dist";
+const inputStyles = config.styles.input;
+const inputScripts = config.scripts.input;
+const outputDir = config.outputDir;
 
 const type = process.argv[2];
 
