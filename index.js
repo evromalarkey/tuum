@@ -19,6 +19,8 @@ const outputDir = config.outputDir;
 
 const type = process.argv[2];
 
+let postcssPlugins = [postcssImport, postcssNesting, postcssCustomMedia, postcssCustomSelectors, postcssMixins, autoprefixer]
+
 if (!fs.existsSync(outputDir)){
     fs.mkdirSync(outputDir);
 } else {
@@ -34,7 +36,7 @@ async function Styles(input, output) {
         entryPoints,
         plugins: [
             postCssPlugin.default({
-                plugins: [postcssImport, postcssNesting, postcssCustomMedia, postcssCustomSelectors, postcssMixins, autoprefixer]
+                plugins: postcssPlugins
             })
         ],
         entryNames: '[name].[hash]',

@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "serve": "vite",
     "build": "node index.js",
     "build:styles": "node index.js styles",
     "build:scripts": "node index.js scripts"
@@ -19,6 +20,7 @@
     "postcss-import": "^14.0.1",
     "postcss-mixins": "^7.0.3",
     "postcss-nesting": "^8.0.0",
-    "tiny-glob": "^0.2.8"
+    "tiny-glob": "^0.2.8",
+    "vite": "^2.2.3"
   }
 }
