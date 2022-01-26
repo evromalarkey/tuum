@@ -1,5 +1,6 @@
 # Tuum
-Estonian word for "core", it should be set of tools to build modern web apps. It's also an alternative build with esbuild approach for Vite.
+Estonian word for "core", it should be set of tools to build modern web apps. 
+It's also an alternative build approach with esbuild for Vite.
 
 ## Installation
 ```shell
