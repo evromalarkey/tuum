@@ -14,11 +14,11 @@ const config = {
         tuum: {
             outDir: "./dist",
             styles: {
-                input: "./main.js",
+                input: "./main.css",
                 plugins: []
             },
             scripts: {
-                input: "./main.css",
+                input: "./main.js",
                 plugins: []
             }
         }
