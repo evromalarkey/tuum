@@ -1,4 +1,10 @@
 {
+  "name": "tuum",
+  "version": "1.0.0",
+  "description": "Estonian word for /core/, it is an alternative build approach with esbuild for Vite",
+  "main": "index.js",
+  "author": "lubomirblazekcz",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "serve": "vite",
@@ -22,5 +28,15 @@
     "tiny-glob": "^0.2.9",
     "vite": "^2.7.13",
     "lodash": "^4.17.21"
+  },
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lubomirblazekcz/tuum.git"
   }
 }

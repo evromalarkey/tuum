@@ -3,11 +3,12 @@ import postCssPlugin from "esbuild-plugin-postcss2";
 import CleanCSS from "clean-css";
 import glob from "tiny-glob";
 import fs from "fs";
+import path from "path";
 import fse from "fs-extra";
-import lodash from "lodash"
+import lodash from "lodash";
 
 const type = process.argv[2];
-const configPath = "./vite.config.js";
+const configPath = path.join(process.cwd(), "./vite.config.js");
 const config = {
     build: {
         tuum: {
