@@ -6,16 +6,19 @@ import fs from "fs";
 import fse from "fs-extra";
 import lodash from "lodash"
 
+const type = process.argv[2];
 const configPath = "./vite.config.js";
 const config = {
     build: {
         tuum: {
             outDir: "./dist",
             styles: {
-                input: "./main.js"
+                input: "./main.js",
+                plugins: []
             },
             scripts: {
-                input: "./main.css"
+                input: "./main.css",
+                plugins: []
             }
         }
     }
@@ -28,9 +31,7 @@ if (fs.existsSync(configPath)) {
 const inputStyles = config.build.tuum.styles.input;
 const inputScripts = config.build.tuum.scripts.input;
 const outputDir = config.build.tuum.outDir;
-const postcssPlugins = typeof config?.css?.postcss?.plugins !== 'undefined' ? config.css.postcss.plugins : []
-
-const type = process.argv[2];
+const postcssPlugins = typeof config?.css?.postcss?.plugins !== 'undefined' ? config.css.postcss.plugins : [];
 
 if (!fs.existsSync(outputDir)){
     fs.mkdirSync(outputDir);
@@ -49,7 +50,7 @@ async function Styles(input, output) {
             postCssPlugin.default({
                 plugins: postcssPlugins
             })
-        ],
+        ].concat(config.build.tuum.styles.plugins),
         entryNames: '[name].[hash]',
         outdir: output,
         write: false
@@ -76,6 +77,7 @@ async function Scripts(input, output) {
 
     const result = await esbuild.build({
         entryPoints,
+        plugins: config.build.tuum.scripts.plugins,
         assetNames: '[name].[hash]',
         chunkNames: '[name].[hash]',
         entryNames: '[name].[hash]',
