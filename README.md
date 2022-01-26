@@ -1,5 +1,5 @@
 # Tuum
-Estonian word for "core", it should be set of tools to build modern web apps.
+Estonian word for "core", it should be set of tools to build modern web apps. It's also an alternative build with esbuild approach for Vite.
 
 ## Installation
 ```shell
@@ -10,7 +10,7 @@ npm i
 ```shell
 npm run build
 ```
-or
+or separately
 ```shell
 npm run build:styles
 npm run build:scripts

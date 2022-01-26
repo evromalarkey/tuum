@@ -1,25 +1,36 @@
 import esbuild from "esbuild";
 import postCssPlugin from "esbuild-plugin-postcss2";
-import autoprefixer from "autoprefixer";
-import postcssImport from "postcss-import";
-import postcssNesting from "postcss-nesting/dist/index.mjs";
-import postcssCustomSelectors from "postcss-custom-selectors";
-import postcssCustomMedia from "postcss-custom-media";
-import postcssMixins from "postcss-mixins";
 import CleanCSS from "clean-css";
 import glob from "tiny-glob";
 import fs from "fs";
 import fse from "fs-extra";
-import config from "./tuum.config.js";
+import lodash from "lodash"
 
+const configPath = "./vite.config.js";
+const config = {
+    build: {
+        tuum: {
+            outDir: "./dist",
+            styles: {
+                input: "./main.js"
+            },
+            scripts: {
+                input: "./main.css"
+            }
+        }
+    }
+};
 
-const inputStyles = config.styles.input;
-const inputScripts = config.scripts.input;
-const outputDir = config.outputDir;
+if (fs.existsSync(configPath)) {
+    lodash.merge(config, (await import(configPath)).default)
+}
+
+const inputStyles = config.build.tuum.styles.input;
+const inputScripts = config.build.tuum.scripts.input;
+const outputDir = config.build.tuum.outDir;
+const postcssPlugins = typeof config?.css?.postcss?.plugins !== 'undefined' ? config.css.postcss.plugins : []
 
 const type = process.argv[2];
-
-let postcssPlugins = [postcssImport, postcssNesting, postcssCustomMedia, postcssCustomSelectors, postcssMixins, autoprefixer]
 
 if (!fs.existsSync(outputDir)){
     fs.mkdirSync(outputDir);
