@@ -1,6 +1,6 @@
 {
   "name": "tuum",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Estonian word for /core/, it is an alternative build approach with esbuild for Vite",
   "main": "index.js",
   "author": "lubomirblazekcz",

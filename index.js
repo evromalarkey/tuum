@@ -38,13 +38,11 @@ const inputScripts = config.tuum.scripts.input;
 const outputDir = config.tuum.outDir;
 const postcssPlugins = typeof config?.css?.postcss?.plugins !== 'undefined' ? config.css.postcss.plugins : [];
 
-if (!fs.existsSync(outputDir)){
-    fs.mkdirSync(outputDir);
+if (!fs.existsSync(path.join(outputDir, config.tuum.assetsDir))){
+    fs.mkdirSync(path.join(outputDir, config.tuum.assetsDir));
 } else {
-    fse.emptyDirSync(outputDir);
+    fse.emptyDirSync(path.join(outputDir, config.tuum.assetsDir));
 }
-
-fs.mkdirSync(path.join(outputDir, config.tuum.assetsDir));
 
 async function Styles(input, output) {
     let start = new Date();
