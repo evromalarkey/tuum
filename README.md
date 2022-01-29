@@ -13,15 +13,35 @@ npm i
 
 ## Build (esbuild)
 ```shell
-npm run build
+npx tuum
 ```
 or separately
 ```shell
-npm run build:styles
-npm run build:scripts
+npx tuum styles
+npx tuum scripts
 ```
 
 ## Serve (vite)
 ```shell
-npm run serve
+npx vite
+```
+
+## Default config (vite.config.js)
+
+```js
+  tuum: {
+    outDir: "./dist",
+    styles: {
+      input: "./main.css",
+      plugins: [],
+      cleanCss: {
+        inline: [ 'all' ],
+        level: { '1': { specialComments: 0 }, '2': { all: true } }
+      }
+    },
+    scripts: {
+      input: "./main.js",
+      plugins: []
+    }
+  }
 ```
