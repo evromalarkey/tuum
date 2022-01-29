@@ -1,6 +1,6 @@
 {
   "name": "tuum",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Estonian word for /core/, it is an alternative build approach with esbuild for Vite",
   "main": "index.js",
   "author": "lubomirblazekcz",
@@ -11,9 +11,7 @@
   },
   "scripts": {
     "serve": "vite",
-    "build": "node index.js",
-    "build:styles": "node index.js styles",
-    "build:scripts": "node index.js scripts"
+    "build": "node index.js"
   },
   "dependencies": {
     "autoprefixer": "^10.4.2",

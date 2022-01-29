@@ -9,11 +9,11 @@ import fse from "fs-extra";
 import lodash from "lodash";
 import assetsManifest from "esbuild-plugin-assets-manifest";
 
-const type = process.argv[2];
 const configPath = path.join(process.cwd(), "./vite.config.js");
 const config = {
     tuum: {
         outDir: "./dist",
+        assetsDir: "assets",
         styles: {
             input: "./main.css",
             plugins: [],
@@ -44,6 +44,8 @@ if (!fs.existsSync(outputDir)){
     fse.emptyDirSync(outputDir);
 }
 
+fs.mkdirSync(path.join(outputDir, config.tuum.assetsDir));
+
 async function Styles(input, output) {
     let start = new Date();
 
@@ -62,7 +64,7 @@ async function Styles(input, output) {
         ].concat(config.tuum.styles.plugins),
         metafile: true,
         entryNames: '[name].[hash]',
-        outdir: output,
+        outdir: path.join(outputDir, config.tuum.assetsDir),
         write: false
     });
 
@@ -94,7 +96,7 @@ async function Scripts(input, output) {
         chunkNames: '[name].[hash]',
         entryNames: '[name].[hash]',
         metafile: true,
-        outdir: output,
+        outdir: path.join(outputDir, config.tuum.assetsDir),
         format: 'esm',
         splitting: true,
         minify: true,
@@ -109,11 +111,23 @@ async function Scripts(input, output) {
     setTimeout(() => console.info("\x1b[34m", `scripts`, "\x1b[33m", `${new Date() - start}ms`, "\x1b[0m"), 1);
 }
 
-type === "styles" && Styles(inputStyles, outputDir)
+async function JoinManifest() {
+    return new Promise(resolve => {
+        const manifestStyles = JSON.parse(fs.readFileSync(path.join(outputDir, "manifest.css.json")).toString())
+        const manifestScripts = JSON.parse(fs.readFileSync(path.join(outputDir, "manifest.js.json")).toString())
+        const manifest = lodash.merge(manifestStyles, manifestScripts)
 
-type === "scripts" && Scripts(inputScripts, outputDir)
+        fs.unlinkSync(path.join(outputDir, "manifest.css.json"))
+        fs.unlinkSync(path.join(outputDir, "manifest.js.json"))
 
-if (typeof type === "undefined") {
-    await Styles(inputStyles, outputDir)
-    await Scripts(inputScripts, outputDir)
+        fs.writeFileSync(path.join(outputDir, "manifest.json"), JSON.stringify(manifest))
+
+        resolve()
+    })
 }
+
+await Styles(inputStyles, outputDir)
+await Scripts(inputScripts, outputDir)
+await JoinManifest()
+
+
